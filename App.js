@@ -7,14 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { Provider } from "react-redux";
+import configureStore from './App/Store/configureStore';
 
 import AppNavigator from './App/Navigator/AppNavigator'
 
@@ -25,7 +19,9 @@ class App extends Component{
 
   render(){
     return( 
-        <AppNavigator/> 
+      <Provider store={configureStore}>
+          <AppNavigator/> 
+      </Provider> 
     )
   }
 }

@@ -4,6 +4,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Header from '../Components/Header';
 import Images from '../Utils/Images';
 import styles from '../Utils/styles';
+import { connect } from "react-redux";
+import { SaveCredentials } from '../Store/Actions/SaveLogin'
 
 class LoginScreen extends Component{
 
@@ -32,36 +34,39 @@ class LoginScreen extends Component{
                             onChangeText={text => this.setState({Password:text})}
                             value={this.state.Password}
                             placeholder={'Enter Password'}
+                            secureTextEntry={true}
                             placeholderTextColor={'grey'}
                         /> 
                     </View>
 
                     <View>
-                        <TouchableOpacity style={{}} onPress={() => this.props.navigation.navigate('DashboardScreen')}>
+                        <TouchableOpacity style={{}} onPress={() => this.Save()}>
                             <Text style={[styles.Login.Button,{backgroundColor:'blue'}]} > Login </Text>
                         </TouchableOpacity>
                     </View>
                    
 
-                 </View>
-
-                
-                
-
+                 </View> 
             </View>
         ) 
-    }
- 
+    } 
 
-    componentDidMount(){
-           
+    Save(){
+        let Credentials ={username:this.state.Email,password:this.state.Password}
+        this.props.SC(Credentials); 
+        this.props.navigation.navigate('DashboardScreen');
     }
-
-    componentWillUnmount(){
-
-    }
- 
 
 }
 
-export default LoginScreen;
+const mapStateToProps = (state) => {
+    return state;
+  }
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        SC: (Credentials) => dispatch(SaveCredentials(Credentials)), 
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+ 

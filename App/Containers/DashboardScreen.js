@@ -1,54 +1,31 @@
-import React, {Component} from 'react';
-import { View , Text, TouchableOpacity } from 'react-native';
-import Header from "../Components/Header"
-class Dashboard extends Component{
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { connect } from "react-redux";
+import { SaveCredentials } from "../Store/Actions/SaveLogin";
 
-    constructor(props){
-        super(props)
-        this.state = ({TextValue: 'First String',count:0}) // state definde
-    }
+class DashboardScreen extends Component {
+  constructor(props) {
+    super(props); 
+  }
 
-    render(){ 
-        return(
-            <View>
-                 <Header title={"DEMO SCREEN 2"}  navigation={this.props.navigation}/>
-                <Text> this is second screen</Text>
-                <Text style={{fontSize:25}}> {this.state.count} </Text>  
-                <TouchableOpacity style={{}} onPress={()=> this.setState({count:this.state.count+1})}>
-                    <Text style={{fontSize:30}}> Increase Count by 1</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{}} onPress={()=> this.resetCounter() }>
-                    <Text style={{fontSize:30}}> Reset Count</Text>
-                </TouchableOpacity>
-            </View>
-        ) 
-    }
-
-    componentDidMount(){
-            setTimeout(()=>{
-                // We are chaging state
-                
-                 this.setState({TextValue:'thirdScreen'});
-            },2000)
-    }
-
-    componentWillUnmount(){
-
-    }
-
-    resetCounter = ()=> {
-        this.setState({count:0})
-    }
-
-    incrementcountertotwo=function(){
-        this.setState({count:this.state.count+2})
-    }.bind(this)
-
-    // resetCountertwo(){
-    //     this
-    // }
-
+  render() {
+    // console.log(""+JSON.stringify(this.props.LoginReducer.Username))
+    return (
+      <View>
+         <Text style={{fontSize:25}}> UserName : {this.props.Username} </Text>  
+      </View>
+    );
+  }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return state.LoginReducer;
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+      SaveCredentials: (Credentials) => dispatch(SaveCredentials(Credentials)), 
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen);
+ 

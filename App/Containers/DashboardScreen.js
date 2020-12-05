@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { View , Text, TouchableOpacity } from 'react-native';
-import Header from '../Components/Header';
-
-class demo extends Component{
+import Header from "../Components/Header"
+class Dashboard extends Component{
 
     constructor(props){
         super(props)
@@ -12,7 +11,8 @@ class demo extends Component{
     render(){ 
         return(
             <View>
-                <Header title={"DEMO SCREEN 1"}  />
+                 <Header title={"DEMO SCREEN 2"}  navigation={this.props.navigation}/>
+                <Text> this is second screen</Text>
                 <Text style={{fontSize:25}}> {this.state.count} </Text>  
                 <TouchableOpacity style={{}} onPress={()=> this.setState({count:this.state.count+1})}>
                     <Text style={{fontSize:30}}> Increase Count by 1</Text>
@@ -21,14 +21,6 @@ class demo extends Component{
                 <TouchableOpacity style={{}} onPress={()=> this.resetCounter() }>
                     <Text style={{fontSize:30}}> Reset Count</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{}} onPress={()=> this.incrementcountertotwo() }>
-                    <Text style={{fontSize:30}}> Increment Count to 2</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{}} onPress={()=> this.props.navigation.navigate("DemoScreen2") }>
-                    <Text style={{fontSize:30}}> Go to 2nd screen</Text>
-                </TouchableOpacity>
-
             </View>
         ) 
     }
@@ -59,4 +51,4 @@ class demo extends Component{
 
 }
 
-export default demo;
+export default Dashboard;

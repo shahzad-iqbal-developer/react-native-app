@@ -11,14 +11,18 @@ class Header extends Component {
     render(){
         return( 
             <View style={styles.Header.MainView}>
-               
+               { this.props.showBack &&
                 <TouchableOpacity onPress = {()=> this.props.navigation.goBack()}>
                      <Text style={styles.Header.HeaderTitle}> BACK </Text> 
-                 </TouchableOpacity>
+                </TouchableOpacity>
+               }
+               
 
                 <Text style={styles.Header.HeaderTitle}> {this.props.title}  </Text>
 
-                <Text>    </Text>
+                {
+                 this.props.showBack && <Text>    </Text>
+                }
             </View>
         )
     }
